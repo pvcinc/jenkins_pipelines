@@ -1,9 +1,15 @@
 pipeline {
 	agent any
 	stages {
-		stage('test') {
+		stage('Run Multiple Steps') {
 			steps {
-				sh 'echo "Hello World!"'
+				sh 'echo Executing command 1...'
+				sh '''
+				    echo "Executing command 2..." 
+				    echo "Executing command 3..."
+				    echo "Executing command N..."
+                                    ls -lah
+				'''
 			}
 		}
 	}
