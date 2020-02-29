@@ -1,6 +1,10 @@
-node('docker') {
-	checkout scm
-	stage('Build') {
-		docker.image('hello-world')
+pipeline {
+	agent any
+	stages {
+		stage('test') {
+			steps {
+				sh 'echo "Hello World!"'
+			}
+		}
 	}
 }
