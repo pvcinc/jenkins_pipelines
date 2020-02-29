@@ -1,16 +1,29 @@
 pipeline {
 	agent any
 	stages {
-		stage('RetryStepWithTimeout') {
+		stage('Fail') {
 			steps {
-				timeout(time: 3, unit: 'SECONDS') {
-					retry(5) {
-						sh 'echo "The max time to try this step 5 times is 3 seconds"'
-						sh 'echo "A Failure occured!"; exit 1'
-					}
-					sh 'sleep 4'
-				}
+				sh 'echo "Fail!"; exit 1'
 			}
+		}
+	}
+	post {
+		always {
+			echo 'this always executes'
+		}
+		success {
+			echo 'this executes if the run succeeds'
+		}
+		failure {
+			echo 'this executes if the run failed'
+		}
+		unstable {
+			echo 'this executes if the run is unstable'	
+		}
+		changed {
+			echo 'this executes if the pipeline state changed'
+			echo 'e.g. the pipeline was failing and now succeeds'
+			echo 'e.g. the pipeline was succeeding and now fails'
 		}
 	}
 }
