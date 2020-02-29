@@ -1,15 +1,11 @@
 pipeline {
 	agent any
 	stages {
-		stage('Run Multiple Steps') {
+		stage('StepWithTimeout') {
 			steps {
-				sh 'echo Executing command 1...'
-				sh '''
-				    echo "Executing command 2..." 
-				    echo "Executing command 3..."
-				    echo "Executing command N..."
-                                    ls -lah
-				'''
+				timeout(time: 3, unit: 'SECONDS') {
+					sh 'The max time for this command to run is 3 seconds'
+				}
 			}
 		}
 	}
