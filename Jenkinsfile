@@ -1,10 +1,12 @@
 pipeline {
 	agent any
 	stages {
-		stage('StepWithRetries') {
+		stage('RetryStepWithTimeout') {
 			steps {
-				retry(3) {
-					sh 'echo "If this step failed Jenkins would try again 3 times"'
+				timeout(time: 3, unit: 'SECONDS') {
+					retry(5) {
+						sh 'echo "The max time to try this step 5 times is 3 seconds"'
+					}
 				}
 			}
 		}
