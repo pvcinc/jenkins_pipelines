@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'JakeEnvironment'
+        label '!windows'
     }
     environment {
         VARIABLE_1 = 'value 1'
