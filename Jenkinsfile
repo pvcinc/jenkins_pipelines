@@ -5,19 +5,18 @@ pipeline {
 	}
 	stages {
 		stage('Build') {
-			steps {
-				echo 'Building ...'
-			}
+			echo 'Building ...'
 		}
 		stage('Test') {
-			steps {
-				echo 'Testing, 1, 2, 3 ...'
-			}
+			echo 'Unit Testing 1, 2, 3...'
 		}
-		stage('Deploy') {
-			steps {
-				echo 'Deploying ...'
-			}
+		stage('Deploy to Staging') {
+			echo 'Deploying to Staging Environment ...'
+			echo 'Smoke Testing 1, 2, 3...'
+		}		
+		stage('Deploy to Production') {
+			echo 'Deploying to Production Environment ...'
+			
 		}
 	}
 }
