@@ -21,7 +21,7 @@ pipeline {
 			steps {
 				echo "I'm waiting for approval to proceed"
 				timeout(time: 60, unit: 'SECONDS') {
-					echo "Does the staging environment look right?"
+					input "Does the staging environment look right?"
 				}
 			}
 		}
