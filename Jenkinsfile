@@ -1,18 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('FailingStage') {
+        stage('SucceedingStage') {
             steps {
-                echo "A Failure Occured!"
-                sh 'exit 1'
+                echo "I ran successfully"
             }
         }
     }
     post {
-        failure {
-            mail to: '$USERNAME@DOMAIN',
-            subject: "Failed Pipeline: $currentBuild.fullDisplayName",
-            body: "Please check $env.BUILD_URL"
+        success {
+            slackSend channel: '#ci_cd_build',
+                      color: 'good',
+                      message: "The pipeline $currentBuild.fullDisplayName was successful"
         }
     }
 }
