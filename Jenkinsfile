@@ -4,7 +4,7 @@ pipeline {
         stage('FailingStage') {
             steps {
                 echo "A Failure Occured!"
-                exit 1
+                sh 'exit 1'
             }
         }
     }
