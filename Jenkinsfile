@@ -1,29 +1,34 @@
 pipeline {
 	agent any
-	options {
-		skipStagesAfterUnstable()
-	}
 	stages {
+		
 		stage('Build') {
-			steps { 
-				echo 'Building ...'
-			 }
+			steps {
+				echo "I'm Building ..."
+			}
 		}
 		stage('Test') {
-			steps { 
-				echo 'Unit Testing 1, 2, 3...' 
+			steps {
+				echo "I'm unit testing ..."
 			}
 		}
 		stage('Deploy to Staging') {
-			steps { 
-				echo 'Deploying to Staging Environment ...'
-				echo 'Smoke Testing 1, 2, 3...'
-			 }
-		}		
+			steps {
+				echo "I'm deploying to staging ..."
+			}
+		}
+		stage('Human Approval') {
+			steps {
+				echo "I'm waiting for approval to proceed"
+				timeout(time: 60, unit: 'SECONDS') {
+					echo "Does the staging environment look right?"
+				}
+			}
+		}
 		stage('Deploy to Production') {
-			steps { 
-				echo 'Deploying to Production Environment ...' 
-			}		
+			steps {
+				echo "I'm deploy to production ..."
+			}
 		}
 	}
 }
