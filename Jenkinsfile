@@ -1,17 +1,23 @@
 pipeline {
-    agent any
-    stages {
-        stage('SucceedingStage') {
-            steps {
-                echo "I ran successfully"
-            }
-        }
-    }
-    post {
-        success {
-            slackSend channel: '#ci_cd_build',
-                      color: 'good',
-                      message: "The pipeline $currentBuild.fullDisplayName was successful"
-        }
-    }
+	agent any
+	options {
+		skipStagesAfterUnstable()
+	}
+	stages {
+		stage('Build') {
+			steps {
+				echo 'Building ...'
+			}
+		}
+		stage('Test') {
+			steps {
+				echo 'Testing, 1, 2, 3 ...'
+			}
+		}
+		stage('Deploy') {
+			steps {
+				echo 'Deploying ...'
+			}
+		}
+	}
 }
