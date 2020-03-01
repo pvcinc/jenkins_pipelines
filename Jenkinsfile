@@ -1,8 +1,12 @@
 pipeline {
-	agent any
+	agent {
+		docker { image 'node:7-alpine' }
+	}
+
 	stages {
-		stage('WorkspaceDirectory') {
+		stage('DockerWorkspace') {
 			steps {
+				sh 'node --version'
 				sh 'pwd'
 				sh 'whoami'
 			}
