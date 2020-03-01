@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
         stage('FailingStage') {
-            step {
+            steps {
                 echo "A Failure Occured!"
                 exit 1
             }
